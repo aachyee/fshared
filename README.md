@@ -6,7 +6,7 @@ A simple client to interact with Fshare.VN through their API.
 
 This repoditory was forked from [sntran/fshared](https://github.com/sntran/fshared) on March 28, 2025.
 
-It's under WIP, because we are working on modifying to support deno v2. 
+It's under WIP, because we are working on modifying to run on deno v2. 
 
 ## Installation
 
