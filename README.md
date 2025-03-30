@@ -18,7 +18,37 @@ permissions. Tweak the permission flags as needed. See
 https://deno.land/manual/getting_started/permissions
 
 ```shell
-deno install --unstable --allow-all -n fshare https://deno.land/x/fshare/main.ts
+deno install --global --reload --lock $(mktemp) --allow-all --name fshare \
+ --config <(curl https://raw.githubusercontent.com/aachyee/fshared/refs/heads/main/deno.json) \
+ https://raw.githubusercontent.com/aachyee/fshared/refs/heads/main/main.ts
+```
+
+Or
+
+```shell
+git clone https://github.com/aachyee/fshared.git
+cd fshared
+deno install --global --reload --allow-all --name fshare --config deno.json main.ts
+```
+
+The executable binary file `fshare` wiil be generated in `$(HOME)/.deno/bin/fshare`.
+
+## Compiling
+
+Generating executable file. but not install.
+
+```shell
+git clone https://github.com/aachyee/fshared.git
+cd fshared
+deno compile -A -r --unstable --config deno.json  ./main.ts
+```
+
+The executable binary file `fshare` wiil be generated in current directory.
+
+Where is compiled(transpiled) javascript files?
+
+```shell
+ls -la "$(NO_COLOR=1 deno info | grep -E '^Emitted modules cache:' | cut '-d ' -f4)/file${PWD}"
 ```
 
 ## Command-Line Usage
