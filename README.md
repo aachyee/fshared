@@ -51,6 +51,9 @@ Where is compiled(transpiled) javascript files?
 ls -la "$(NO_COLOR=1 deno info | grep -E '^Emitted modules cache:' | cut '-d ' -f4)/file${PWD}"
 ```
 
+But it's enable on deno 2.1.4 or before. Why?
+
+
 ## Command-Line Usage
 
 All commands requires `--username` and `--password` flags to authenticate with
