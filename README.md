@@ -40,7 +40,7 @@ Generating executable file. but not install.
 ```shell
 git clone https://github.com/aachyee/fshared.git
 cd fshared
-deno compile -A -r --unstable --config deno.json  ./main.ts
+deno compile -A -r --output fshare --config deno.json ./main.ts
 ```
 
 The executable binary file `fshare` wiil be generated in current directory.
