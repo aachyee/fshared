@@ -31,7 +31,7 @@ cd fshared
 deno install --global --reload --allow-all --name fshare --config deno.json main.ts
 ```
 
-The executable binary file `fshare` wiil be generated in `$(HOME)/.deno/bin/fshare`.
+The executable binary file `fshare` wiil be generated in `$(HOME)/.deno/bin/`.
 
 ## Compiling
 
