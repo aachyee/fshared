@@ -83,7 +83,7 @@ let {
 
 const [command, ...args] = params;
 
-const headers = [].concat(header).reduce((headers, header: string) => {
+const headers = ([] as string[]).concat(header).reduce((headers, header: string) => {
   const [key, value] = header.split(/:\s?/);
   headers.append(key, value);
   return headers;
@@ -122,6 +122,10 @@ if (command === "download") {
 
   if (remoteName) {
     output = new URL(url).pathname.split("/").pop();
+    if (!output) {
+      console.error("Invalid URL");
+      Deno.exit(1);
+    }
     writable = (await Deno.open(output, {
       read: false,
       create: true,
@@ -130,8 +134,9 @@ if (command === "download") {
   }
 
   if (body) {
+    const title = "downloading:";
     const total = Number(headers.get("Content-Length"));
-    const progressBar = progress ? new ProgressBar({ total }) : undefined;
+    const progressBar = progress ? new ProgressBar({ title: title, total: total }) : undefined;
     body
       .pipeThrough(
         new Progress((progress) => {
@@ -143,13 +148,13 @@ if (command === "download") {
     console.log(headers.get("Location"));
   }
 } else if (command === "upload") {
-  const input = args[0], path = args[1] || "/";
+  const input = args[0] as string, path = args[1] as string || "/";
   if (!input) {
     console.error("Missing input file");
     Deno.exit(1);
   }
 
-  let body: BodyInit;
+  let body: ReadableStream;
   const headers: HeadersInit = {};
 
   if (input === "-") {
@@ -169,9 +174,11 @@ if (command === "download") {
     }
   }
 
+  const total = Number(size);
   headers["Content-Length"] = size;
+  const title = "uploading:";
 
-  const progressBar = progress ? new ProgressBar({ total: size }) : undefined;
+  const progressBar = progress ? new ProgressBar({ title: title, total: total }) : undefined;
   const response = await client.upload(join(path, basename(input)), {
     redirect,
     headers,
