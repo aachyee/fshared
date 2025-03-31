@@ -47,11 +47,19 @@ The executable binary file `fshare` wiil be generated in current directory.
 
 Where is compiled(transpiled) javascript files?
 
+run follow command.
+
 ```shell
-ls -la "$(NO_COLOR=1 deno info | grep -E '^Emitted modules cache:' | cut '-d ' -f4)/file${PWD}"
+deno install --entrypoint main.ts
 ```
 
-But it's enable on deno 2.1.4 or before. Why?
+.ts.js file has been generated in `~/.cache/deno/gen$PWD`.
+
+```shell
+ls -l "$(NO_COLOR=1 deno info | grep -E '^Emitted modules cache:' | cut '-d ' -f4)/file${PWD}"
+```
+
+
 
 
 ## Command-Line Usage
