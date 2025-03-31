@@ -8,6 +8,8 @@ This repoditory was forked from [sntran/fshared](https://github.com/sntran/fshar
 
 It's under WIP, because we are working on modifying to run on Deno 2(Deno v2). 
 
+Referrence document: [Deno 1.x to 2.x Migration Guide](https://docs.deno.com/runtime/reference/migration_guide/)
+
 ## Installation
 
 Until static binaries are released, Deno must be installed. Instructions can be
